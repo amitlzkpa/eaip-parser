@@ -1,7 +1,7 @@
 # eAIP Parser
 The parser scans the eAIP portal and extracts the information to jsons.
-eAIP is the platform that AAI manages for public information.
-https://aim-india.aai.aero/eaip/
+eAIP is the platform that AAI manages for public information.  
+https://aim-india.aai.aero/eaip/  
 The information is published on their web page in html tables. The parser scans the portal and extracts relevant information. The parser converts the coordinates from the eAIP portal to a mapping decimal coordinates.
 The parser is written in Javascript and published as an open source project.
 Published information includes important elements of India's aeronautical infrastructure.
