@@ -1,10 +1,9 @@
 # eAIP Parser
 The parser scans the eAIP portal and exports the information to json files.  
-[eAIP](https://aim-india.aai.aero/eaip) is the platform that [AAI](https://www.aai.aero) manages for public information about aviation infrastructure in India.  
-The information is published on their web page in html tables. The parser scans the portal and extracts relevant information. The parser converts the coordinates from the eAIP portal to a mapping decimal coordinates.  
-The parser is written in Javascript and published as an open source project.
-Published information includes important elements of India's aeronautical infrastructure.
-Eg: 
+[eAIP](https://aim-india.aai.aero/eaip) is the platform that [AAI](https://www.aai.aero) manages for public information about aeronautical infrastructure in India.  
+The information is published on their web page in html tables. The parser scans the portal and extracts relevant information. The parser converts the coordinates from the eAIP portal to decimal geographic coordinates.  
+It is a nodejs project with an open license.  
+Published information includes important elements like:
 - Airports
 - Airspaces
 - Communication Frequencies
