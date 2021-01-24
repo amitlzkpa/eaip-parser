@@ -9,8 +9,9 @@ Published information includes important elements like:
 - Communication Frequencies
 - Runway information
 - Coordinates
-- more
-**[SAMPLES]**(./samples.md)
+- more  
+
+**[SAMPLES](./samples.md)**
 
 This repo contains the parser and some maps plotted created with the parsed data.
 
