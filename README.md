@@ -18,3 +18,9 @@ This series of maps plots important elements of India's aeronautical infrastruct
 The geographic boundaries have been sources from Bhuvan webportal and the information about aerodromes and associated information has been sources from Aeronautical Information Package (eAIP) - the official Indian aviation regulatory body's data platform.  
 An additional layer shows the positions of all the radio stations which is useful for both VFR/IFR flying.  
 It forms a part of the project as an automated system to update maps with latest publicly posted information. More information than what is shown in the map is parsed. In future development the additional information will exposed via a web map which allows creating an easier interface for representing the data.
+
+# Setup
+
+## Clone the repo `git clone https://github.com/amitlzkpa/eaip-parser.git`
+## Navigate into project directory and run `npm i`
+## Run `npm start` to query and parse

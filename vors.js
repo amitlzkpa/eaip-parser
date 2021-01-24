@@ -24,7 +24,7 @@ async function fetchVorPages() {
 
 	console.log(`Fetching data for vors`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html`);
-	fs.writeFileSync(`./airport-data/radios-position.html`, res.data.toString());
+	fs.writeFileSync(`./exported-data/radios-position.html`, res.data.toString());
 	console.log(`Fetched data for vors`);
 
 }
@@ -34,8 +34,8 @@ async function fetchVorPages() {
 // -----------------------------------------------------
 
 
-let vorStnRawPath = './airport-data/radios-position.html';
-let vorStnJsnPath = './airport-data/jsons/radios-stations.json';
+let vorStnRawPath = './exported-data/radios-position.html';
+let vorStnJsnPath = './exported-data/jsons/radios-stations.json';
 
 
 let VOR_STATIONS = {};
@@ -110,7 +110,7 @@ async function saveVorData() {
 		features: features
 	};
 
-	fs.writeFileSync(`./airport-data/jsons/radios-geodata.geojson`, JSON.stringify(geoJson, null, 4));
+	fs.writeFileSync(`./exported-data/jsons/radios-geodata.geojson`, JSON.stringify(geoJson, null, 4));
 
 }
 
