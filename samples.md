@@ -1,16 +1,20 @@
 # Samples
 
-## Aerodromes
-Path: `/json/aerodrome-index.json`
-```
-"VEAT": {
-  "name": "AGARTALA AIRPORT",
-  "code": "VEAT",
-  "intlDom": "INTL",
-  "allowedFlightRules": "IFR/VFR",
-  "allowedFlightPlans": "S - NS - P"
-},
-```
+<details>
+<summary>
+  ## Aerodromes
+</summary>
+  Path: `/json/aerodrome-index.json`
+  ```
+  "VEAT": {
+    "name": "AGARTALA AIRPORT",
+    "code": "VEAT",
+    "intlDom": "INTL",
+    "allowedFlightRules": "IFR/VFR",
+    "allowedFlightPlans": "S - NS - P"
+  },
+  ```
+</details>
 
 ## Airports Json
 Path: `/airports.json`
