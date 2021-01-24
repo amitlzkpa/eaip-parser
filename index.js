@@ -15,20 +15,20 @@ let acds = [];
 
 // // usual test set
 acds.push('VAAH');
-acds.push('VABB');
-acds.push('VAJJ');
-acds.push('VECC');
-acds.push('VOHY');
-acds.push('VIAR');
-acds.push('VOBL');
-acds.push('VOCL');
-acds.push('VOMM');
-acds.push('VECO');
-acds.push('VISM');
-acds.push('VEGT');
-acds.push('VASU');
-acds.push('VOTV');
-acds.push('VEBN');
+// acds.push('VABB');
+// acds.push('VAJJ');
+// acds.push('VECC');
+// acds.push('VOHY');
+// acds.push('VIAR');
+// acds.push('VOBL');
+// acds.push('VOCL');
+// acds.push('VOMM');
+// acds.push('VECO');
+// acds.push('VISM');
+// acds.push('VEGT');
+// acds.push('VASU');
+// acds.push('VOTV');
+// acds.push('VEBN');
 
 // // rest of all
 // acds.push('VEIM');
@@ -109,7 +109,7 @@ acds.push('VEBN');
 
 async function main() {
 	await aerodrome.main(acds);
-	// await vors.main();
+	await vors.main();
 }
 
 main();

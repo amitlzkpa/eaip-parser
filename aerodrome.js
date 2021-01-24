@@ -13,6 +13,11 @@ let allowFetch = false;
 allowFetch = true;
 
 
+let EXPORT_FILES_PATH = `./exported-data`;
+let HTML_FILES_PATH = `${EXPORT_FILES_PATH}/html`;;
+let JSON_FILES_PATH = `${EXPORT_FILES_PATH}/json`;
+
+
 // -----------------------------------------------------
 // -----------------------------------------------------
 
@@ -42,30 +47,30 @@ async function fetchStationPages() {
 
 	for(let src of sources) {
 		const res = await axios.get(src.url);
-		fs.writeFileSync(`./exported-data/${src.name}.html`, res.data.toString());
+		fs.writeFileSync(`${HTML_FILES_PATH}/${src.name}.html`, res.data.toString());
 	}
 }
 
 
 
-let metStnRawPath = './exported-data/met-stations.html';
-let metStnJsnPath = './exported-data/jsons/met-stations.json';
+let metStnRawPath = `${HTML_FILES_PATH}/met-stations.html`;
+let metStnJsnPath = `${JSON_FILES_PATH}/met-stations.json`;
 let MET_STATIONS = {};
 
-let licStsRawPath = './exported-data/licensing-status.html';
-let licStsJsnPath = './exported-data/jsons/licensing-status.json';
+let licStsRawPath = `${HTML_FILES_PATH}/licensing-status.html`;
+let licStsJsnPath = `${JSON_FILES_PATH}/licensing-status.json`;
 let LIC_STATIONS = {};
 
-let ardStnRawPath = './exported-data/aerodrome-index.html';
-let ardStnJsnPath = './exported-data/jsons/aerodrome-index.json';
+let ardStnRawPath = `${HTML_FILES_PATH}/aerodrome-index.html`;
+let ardStnJsnPath = `${JSON_FILES_PATH}/aerodrome-index.json`;
 let ARD_STATIONS = {};
 
-let ngtStnRawPath = './exported-data/night-aerodromes.html';
-let ngtStnJsnPath = './exported-data/jsons/night-aerodromes.json';
+let ngtStnRawPath = `${HTML_FILES_PATH}/night-aerodromes.html`;
+let ngtStnJsnPath = `${JSON_FILES_PATH}/night-aerodromes.json`;
 let NGT_STATIONS = {};
 
 let AIRPORT_DATA = {};
-let aptJsnPath = './exported-data/jsons/airports.json';
+let aptJsnPath = `${JSON_FILES_PATH}/airports.json`;
 
 async function parseMetPage() {
 
@@ -253,7 +258,7 @@ async function fetchAerodromeData(acd) {
 
 	console.log(`Fetching data for ${acd}`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1${acd}-en-GB.html`);
-	fs.writeFileSync(`./exported-data/${acd}.html`, res.data.toString());
+	fs.writeFileSync(`${HTML_FILES_PATH}/${acd}.html`, res.data.toString());
 	console.log(`Fetched data for ${acd}`);
 
 }
@@ -264,7 +269,7 @@ async function parseAerodromeData(acd) {
 	console.log(`Parsing data for ${acd}`);
 
 
-	let txt = await fs.readFileSync(`./exported-data/${acd}.html`, 'utf-8');
+	let txt = await fs.readFileSync(`${HTML_FILES_PATH}/${acd}.html`, 'utf-8');
 	let $ = cheerio.load(txt);
 	let r;
 	let info = AIRPORT_DATA[acd];
@@ -477,7 +482,7 @@ async function parseAerodromeData(acd) {
 	info.radioFrequencies = radioFrequencies;
 
 
-	fs.writeFileSync(`./exported-data/jsons/${acd}.json`, JSON.stringify(info, null, 4));
+	fs.writeFileSync(`${JSON_FILES_PATH}/${acd}.json`, JSON.stringify(info, null, 4));
 
 
 	console.log(`Parsed data for ${acd}`);
@@ -544,7 +549,7 @@ async function suckAllAerodromeData(acds) {
 		features: features
 	};
 
-	fs.writeFileSync(`./exported-data/jsons/airports-geodata.geojson`, JSON.stringify(geoJson, null, 4));
+	fs.writeFileSync(`${JSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 4));
 
 }
 
@@ -554,6 +559,11 @@ async function suckAllAerodromeData(acds) {
 
 
 async function main(acds) {
+
+	if (!fs.existsSync(EXPORT_FILES_PATH)) fs.mkdirSync(EXPORT_FILES_PATH);
+	if (!fs.existsSync(HTML_FILES_PATH)) fs.mkdirSync(HTML_FILES_PATH);
+	if (!fs.existsSync(JSON_FILES_PATH)) fs.mkdirSync(JSON_FILES_PATH);
+
 
 	await suckStationPages();
 	await suckAllAerodromeData(acds);
@@ -566,7 +576,7 @@ async function main(acds) {
 
 
 module.exports = {
-	suckAerodromeData,
-	suckAllAerodromeData,
+	// suckAerodromeData,
+	// suckAllAerodromeData,
 	main
 }

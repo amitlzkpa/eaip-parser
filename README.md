@@ -24,3 +24,4 @@ It forms a part of the project as an automated system to update maps with latest
 ## Clone the repo `git clone https://github.com/amitlzkpa/eaip-parser.git`
 ## Navigate into project directory and run `npm i`
 ## Run `npm start` to query and parse
+## Check `/exported-data` folder within project for all data
