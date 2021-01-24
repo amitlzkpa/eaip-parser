@@ -106,7 +106,7 @@ async function parseMetPage() {
 	MET_STATIONS = metStations;
 
 	console.log(`Total MET stations: ${Object.keys(MET_STATIONS).length}`);
-	fs.writeFileSync(metStnJsnPath, JSON.stringify(MET_STATIONS, null, 4));
+	fs.writeFileSync(metStnJsnPath, JSON.stringify(MET_STATIONS, null, 2));
 
 }
 
@@ -133,7 +133,7 @@ async function parseLicPage() {
 	LIC_STATIONS = licStations;
 
 	console.log(`Total licensed stations: ${Object.keys(LIC_STATIONS).length}`);
-	fs.writeFileSync(licStsJsnPath, JSON.stringify(LIC_STATIONS, null, 4));
+	fs.writeFileSync(licStsJsnPath, JSON.stringify(LIC_STATIONS, null, 2));
 
 }
 
@@ -166,7 +166,7 @@ async function parseArdPage() {
 	ARD_STATIONS = ardStations;
 
 	console.log(`Total aerodromes: ${Object.keys(ARD_STATIONS).length}`);
-	fs.writeFileSync(ardStnJsnPath, JSON.stringify(ARD_STATIONS, null, 4));
+	fs.writeFileSync(ardStnJsnPath, JSON.stringify(ARD_STATIONS, null, 2));
 
 }
 
@@ -193,7 +193,7 @@ async function parseNgtPage() {
 	NGT_STATIONS = ngtStations;
 
 	console.log(`Total night aerodromes: ${Object.keys(NGT_STATIONS).length}`);
-	fs.writeFileSync(ngtStnJsnPath, JSON.stringify(NGT_STATIONS, null, 4));
+	fs.writeFileSync(ngtStnJsnPath, JSON.stringify(NGT_STATIONS, null, 2));
 
 }
 
@@ -225,7 +225,7 @@ async function consolidateAirportData() {
 	}
 
 	console.log(`Total airports: ${Object.keys(AIRPORT_DATA).length}`);
-	fs.writeFileSync(aptJsnPath, JSON.stringify(AIRPORT_DATA, null, 4));
+	fs.writeFileSync(aptJsnPath, JSON.stringify(AIRPORT_DATA, null, 2));
 
 }
 
@@ -482,7 +482,7 @@ async function parseAerodromeData(acd) {
 	info.radioFrequencies = radioFrequencies;
 
 
-	fs.writeFileSync(`${JSON_FILES_PATH}/${acd}.json`, JSON.stringify(info, null, 4));
+	fs.writeFileSync(`${JSON_FILES_PATH}/${acd}.json`, JSON.stringify(info, null, 2));
 
 
 	console.log(`Parsed data for ${acd}`);
@@ -492,7 +492,7 @@ async function parseAerodromeData(acd) {
 
 async function suckAerodromeData(acd) {
 
-	// await fetchAerodromeData(acd);
+	await fetchAerodromeData(acd);
 	await parseAerodromeData(acd);
 
 }
@@ -549,7 +549,7 @@ async function suckAllAerodromeData(acds) {
 		features: features
 	};
 
-	fs.writeFileSync(`${JSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 4));
+	fs.writeFileSync(`${JSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 

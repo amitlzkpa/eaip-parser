@@ -1,3 +1,5 @@
+[SAMPLES](./samples.md)
+
 # eAIP Parser
 The parser scans the eAIP portal and exports the information to json files.  
 [eAIP](https://aim-india.aai.aero/eaip) is the platform that [AAI](https://www.aai.aero) manages for public information about aeronautical infrastructure in India.  

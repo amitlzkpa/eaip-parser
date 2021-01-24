@@ -24,7 +24,7 @@ async function fetchVorPages() {
 
 	console.log(`Fetching data for vors`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html`);
-	fs.writeFileSync(`./exported-data/radios-position.html`, res.data.toString());
+	fs.writeFileSync(`./exported-data/html/radios-position.html`, res.data.toString());
 	console.log(`Fetched data for vors`);
 
 }
@@ -34,8 +34,8 @@ async function fetchVorPages() {
 // -----------------------------------------------------
 
 
-let vorStnRawPath = './exported-data/radios-position.html';
-let vorStnJsnPath = './exported-data/jsons/radios-stations.json';
+let vorStnRawPath = './exported-data/html/radios-position.html';
+let vorStnJsnPath = './exported-data/json/radios-stations.json';
 
 
 let VOR_STATIONS = {};
@@ -74,7 +74,7 @@ async function parseVorData() {
 	VOR_STATIONS = vorStations;
 
 	console.log(`Total vor stations: ${Object.keys(vorStations).length}`);
-	fs.writeFileSync(vorStnJsnPath, JSON.stringify(vorStations, null, 4));
+	fs.writeFileSync(vorStnJsnPath, JSON.stringify(vorStations, null, 2));
 
 	console.log(`Parsed data for vors`);
 
@@ -110,7 +110,7 @@ async function saveVorData() {
 		features: features
 	};
 
-	fs.writeFileSync(`./exported-data/jsons/radios-geodata.geojson`, JSON.stringify(geoJson, null, 4));
+	fs.writeFileSync(`./exported-data/json/radios-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 
@@ -121,7 +121,7 @@ async function saveVorData() {
 
 async function main() {
 
-	// await fetchVorPages();
+	await fetchVorPages();
 	await parseVorData();
 	await saveVorData();
 
