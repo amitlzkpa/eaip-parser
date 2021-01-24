@@ -5,6 +5,7 @@ const changeCase = require('change-case');
 const cheerio = require('cheerio');
 
 const utils = require('./utils');
+const config = require('./config');
 
 
 // https.globalAgent.options.ca = require('ssl-root-cas/latest').create();
@@ -24,7 +25,7 @@ async function fetchVorPages() {
 
 	console.log(`Fetching data for vors`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html`);
-	fs.writeFileSync(`./exported-data/html/radios-position.html`, res.data.toString());
+	fs.writeFileSync(`${config.EXPORT_PATH}/html/radios-position.html`, res.data.toString());
 	console.log(`Fetched data for vors`);
 
 }
@@ -34,8 +35,8 @@ async function fetchVorPages() {
 // -----------------------------------------------------
 
 
-let vorStnRawPath = './exported-data/html/radios-position.html';
-let vorStnJsnPath = './exported-data/json/radios-stations.json';
+let vorStnRawPath = `${config.EXPORT_PATH}/html/radios-position.html`;
+let vorStnJsnPath = `${config.EXPORT_PATH}/json/radios-stations.json`;
 
 
 let VOR_STATIONS = {};
@@ -110,7 +111,7 @@ async function saveVorData() {
 		features: features
 	};
 
-	fs.writeFileSync(`./exported-data/json/radios-geodata.geojson`, JSON.stringify(geoJson, null, 2));
+	fs.writeFileSync(`${config.EXPORT_PATH}/json/radios-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 

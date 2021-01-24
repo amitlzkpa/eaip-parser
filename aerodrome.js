@@ -4,6 +4,7 @@ const axios = require('axios');
 const changeCase = require('change-case');
 const cheerio = require('cheerio');
 
+const config = require('./config');
 const utils = require('./utils');
 
 
@@ -13,9 +14,8 @@ let allowFetch = false;
 allowFetch = true;
 
 
-let EXPORT_FILES_PATH = `./exported-data`;
-let HTML_FILES_PATH = `${EXPORT_FILES_PATH}/html`;;
-let JSON_FILES_PATH = `${EXPORT_FILES_PATH}/json`;
+let HTML_FILES_PATH = `${config.EXPORT_PATH}/html`;;
+let JSON_FILES_PATH = `${config.EXPORT_PATH}/json`;
 
 
 // -----------------------------------------------------
@@ -560,7 +560,7 @@ async function suckAllAerodromeData(acds) {
 
 async function main(acds) {
 
-	if (!fs.existsSync(EXPORT_FILES_PATH)) fs.mkdirSync(EXPORT_FILES_PATH);
+	if (!fs.existsSync(config.EXPORT_PATH)) fs.mkdirSync(config.EXPORT_PATH);
 	if (!fs.existsSync(HTML_FILES_PATH)) fs.mkdirSync(HTML_FILES_PATH);
 	if (!fs.existsSync(JSON_FILES_PATH)) fs.mkdirSync(JSON_FILES_PATH);
 
