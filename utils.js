@@ -1,5 +1,7 @@
 const geolib = require('geolib');
 
+const config = require('./config');
+
 
 
 // -----------------------------------------------------
@@ -21,11 +23,17 @@ function arrayedParaLines(pLines) {
 }
 
 
+function log(msg) {
+	if (config.LOGGING) console.log(msg);
+}
+
+
 // -----------------------------------------------------
 // -----------------------------------------------------
 
 
 module.exports = {
 	parseAISCoords,
-	arrayedParaLines
+	arrayedParaLines,
+	log
 };

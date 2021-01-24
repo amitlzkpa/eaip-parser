@@ -10,8 +10,6 @@ const utils = require('./utils');
 
 // https.globalAgent.options.ca = require('ssl-root-cas/latest').create();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-let allowFetch = false;
-allowFetch = true;
 
 
 let HTML_FILES_PATH = `${config.EXPORT_PATH}/html`;;
@@ -24,7 +22,7 @@ let JSON_FILES_PATH = `${config.EXPORT_PATH}/json`;
 
 async function fetchStationPages() {
 
-	if (!allowFetch) return;
+	if (!config.DOWNLOAD_HTML) return;
 
 	let sources = [
 		{
@@ -105,7 +103,7 @@ async function parseMetPage() {
 	}
 	MET_STATIONS = metStations;
 
-	console.log(`Total MET stations: ${Object.keys(MET_STATIONS).length}`);
+	utils.log(`Total MET stations: ${Object.keys(MET_STATIONS).length}`);
 	fs.writeFileSync(metStnJsnPath, JSON.stringify(MET_STATIONS, null, 2));
 
 }
@@ -132,7 +130,7 @@ async function parseLicPage() {
 	}
 	LIC_STATIONS = licStations;
 
-	console.log(`Total licensed stations: ${Object.keys(LIC_STATIONS).length}`);
+	utils.log(`Total licensed stations: ${Object.keys(LIC_STATIONS).length}`);
 	fs.writeFileSync(licStsJsnPath, JSON.stringify(LIC_STATIONS, null, 2));
 
 }
@@ -165,7 +163,7 @@ async function parseArdPage() {
 	}
 	ARD_STATIONS = ardStations;
 
-	console.log(`Total aerodromes: ${Object.keys(ARD_STATIONS).length}`);
+	utils.log(`Total aerodromes: ${Object.keys(ARD_STATIONS).length}`);
 	fs.writeFileSync(ardStnJsnPath, JSON.stringify(ARD_STATIONS, null, 2));
 
 }
@@ -192,7 +190,7 @@ async function parseNgtPage() {
 	}
 	NGT_STATIONS = ngtStations;
 
-	console.log(`Total night aerodromes: ${Object.keys(NGT_STATIONS).length}`);
+	utils.log(`Total night aerodromes: ${Object.keys(NGT_STATIONS).length}`);
 	fs.writeFileSync(ngtStnJsnPath, JSON.stringify(NGT_STATIONS, null, 2));
 
 }
@@ -224,7 +222,7 @@ async function consolidateAirportData() {
 		AIRPORT_DATA[code] = d;
 	}
 
-	console.log(`Total airports: ${Object.keys(AIRPORT_DATA).length}`);
+	utils.log(`Total airports: ${Object.keys(AIRPORT_DATA).length}`);
 	fs.writeFileSync(aptJsnPath, JSON.stringify(AIRPORT_DATA, null, 2));
 
 }
@@ -254,19 +252,19 @@ async function suckStationPages() {
 
 async function fetchAerodromeData(acd) {
 
-	if (!allowFetch) return;
+	if (!config.DOWNLOAD_HTML) return;
 
-	console.log(`Fetching data for ${acd}`);
+	utils.log(`Fetching data for ${acd}`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1${acd}-en-GB.html`);
 	fs.writeFileSync(`${HTML_FILES_PATH}/${acd}.html`, res.data.toString());
-	console.log(`Fetched data for ${acd}`);
+	utils.log(`Fetched data for ${acd}`);
 
 }
 
 
 async function parseAerodromeData(acd) {
 
-	console.log(`Parsing data for ${acd}`);
+	utils.log(`Parsing data for ${acd}`);
 
 
 	let txt = await fs.readFileSync(`${HTML_FILES_PATH}/${acd}.html`, 'utf-8');
@@ -485,7 +483,7 @@ async function parseAerodromeData(acd) {
 	fs.writeFileSync(`${JSON_FILES_PATH}/${acd}.json`, JSON.stringify(info, null, 2));
 
 
-	console.log(`Parsed data for ${acd}`);
+	utils.log(`Parsed data for ${acd}`);
 
 }
 

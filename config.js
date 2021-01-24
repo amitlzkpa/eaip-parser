@@ -1,29 +1,33 @@
 
 
 
-const EXPORT_PATH = './exported-data';
+let EXPORT_PATH = './exported-data';
+let DOWNLOAD_HTML = true;
+// DOWNLOAD_HTML = false;
+
+let LOGGING = true;
+LOGGING = false;
 
 
-
-const AERODROME_CODES = [];
+let AERODROME_CODES = [];
 
 
 // // usual test set
 AERODROME_CODES.push('VAAH');
-// AERODROME_CODES.push('VABB');
-// AERODROME_CODES.push('VAJJ');
-// AERODROME_CODES.push('VECC');
-// AERODROME_CODES.push('VOHY');
-// AERODROME_CODES.push('VIAR');
-// AERODROME_CODES.push('VOBL');
-// AERODROME_CODES.push('VOCL');
-// AERODROME_CODES.push('VOMM');
-// AERODROME_CODES.push('VECO');
-// AERODROME_CODES.push('VISM');
-// AERODROME_CODES.push('VEGT');
-// AERODROME_CODES.push('VASU');
-// AERODROME_CODES.push('VOTV');
-// AERODROME_CODES.push('VEBN');
+AERODROME_CODES.push('VABB');
+AERODROME_CODES.push('VAJJ');
+AERODROME_CODES.push('VECC');
+AERODROME_CODES.push('VOHY');
+AERODROME_CODES.push('VIAR');
+AERODROME_CODES.push('VOBL');
+AERODROME_CODES.push('VOCL');
+AERODROME_CODES.push('VOMM');
+AERODROME_CODES.push('VECO');
+AERODROME_CODES.push('VISM');
+AERODROME_CODES.push('VEGT');
+AERODROME_CODES.push('VASU');
+AERODROME_CODES.push('VOTV');
+AERODROME_CODES.push('VEBN');
 
 // // rest of all
 // AERODROME_CODES.push('VEIM');
@@ -103,5 +107,7 @@ AERODROME_CODES.push('VAAH');
 
 module.exports = {
   AERODROME_CODES,
-  EXPORT_PATH
+  EXPORT_PATH,
+  DOWNLOAD_HTML,
+  LOGGING
 }

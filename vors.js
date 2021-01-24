@@ -10,8 +10,6 @@ const config = require('./config');
 
 // https.globalAgent.options.ca = require('ssl-root-cas/latest').create();
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-let allowFetch = false;
-allowFetch = true;
 
 
 // -----------------------------------------------------
@@ -21,12 +19,12 @@ allowFetch = true;
 
 async function fetchVorPages() {
 
-	if (!allowFetch) return;
+	if (!config.DOWNLOAD_HTML) return;
 
-	console.log(`Fetching data for vors`);
+	utils.log(`Fetching data for vors`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html`);
 	fs.writeFileSync(`${config.EXPORT_PATH}/html/radios-position.html`, res.data.toString());
-	console.log(`Fetched data for vors`);
+	utils.log(`Fetched data for vors`);
 
 }
 
@@ -44,7 +42,7 @@ let VOR_STATIONS = {};
 
 async function parseVorData() {
 
-	console.log(`Parsing data for vors`);
+	utils.log(`Parsing data for vors`);
 
 	let txt = await fs.readFileSync(vorStnRawPath, 'utf-8');
 	let $ = cheerio.load(txt);
@@ -74,10 +72,10 @@ async function parseVorData() {
 	}
 	VOR_STATIONS = vorStations;
 
-	console.log(`Total vor stations: ${Object.keys(vorStations).length}`);
+	utils.log(`Total vor stations: ${Object.keys(vorStations).length}`);
 	fs.writeFileSync(vorStnJsnPath, JSON.stringify(vorStations, null, 2));
 
-	console.log(`Parsed data for vors`);
+	utils.log(`Parsed data for vors`);
 
 }
 
