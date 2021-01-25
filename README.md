@@ -24,6 +24,7 @@ It forms a part of the project as an automated system to update maps with latest
 # How to use
 
 Running the commands below will download files from the eaip website which may take time depending on your internet connection.  
+Use the `config.js` file to include/exclude airports for detailed parsing.  
 It currently ignores the certificate verification. If you know a proper fix for that please let me know.  
 
 - Clone the repo `git clone https://github.com/amitlzkpa/eaip-parser.git`
