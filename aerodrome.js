@@ -70,6 +70,7 @@ let NGT_STATIONS = {};
 let AIRPORT_DATA = {};
 let aptJsnPath = `${JSON_FILES_PATH}/airports.json`;
 
+
 async function parseMetPage() {
 
 	let txt, $, r;
