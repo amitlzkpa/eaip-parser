@@ -15,6 +15,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 let HTML_FILES_PATH = `${config.EXPORT_PATH}/html`;
 let JSON_FILES_PATH = `${config.EXPORT_PATH}/json`;
+let GEOJSON_FILES_PATH = `${config.EXPORT_PATH}/geojson`;
 
 
 // -----------------------------------------------------
@@ -303,22 +304,24 @@ async function suckAllAerodromeData(acds) {
 		};
 
 		let feat = {
-	      type: "Feature",
-	      properties: props,
-	      geometry: {
-	        "type": "Point",
-	        "coordinates": stations.AIRPORT_DATA[acd].location
-	      }
-	    };
-	    features.push(feat);
+			type: "Feature",
+			properties: props,
+			geometry: {
+				"type": "Point",
+				"coordinates": stations.AIRPORT_DATA[acd].location
+			}
+		};
+		features.push(feat);
 	}
+
+	if (!config.EXPORT_GEOJSONS) return;
 
 	let geoJson = {
 		type: "FeatureCollection",
 		features: features
 	};
 
-	fs.writeFileSync(`${JSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 2));
+	fs.writeFileSync(`${GEOJSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 

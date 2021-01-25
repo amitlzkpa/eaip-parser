@@ -7,6 +7,10 @@ let EXPORT_PATH = './exported-data';
 let DOWNLOAD_HTML = true;
 // DOWNLOAD_HTML = false; // uncomment to avoid redownloading files if already downloaded
 
+// switch to toggle exporting geojson files 
+let EXPORT_GEOJSONS = true;
+// EXPORT_GEOJSONS = false;
+
 // switch to toggle console logging
 let LOGGING = true;
 // LOGGING = false;
@@ -112,5 +116,6 @@ module.exports = {
   AERODROME_CODES,
   EXPORT_PATH,
   DOWNLOAD_HTML,
+  EXPORT_GEOJSONS,
   LOGGING
 }
