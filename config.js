@@ -3,17 +3,18 @@
 // filepath of location to store downloaded and parsed files
 let EXPORT_PATH = './exported-data';
 
-// switch to toggle downloading source html files
+// switch to toggle downloading source html files (use to avoid
+// redownloading files if already downloaded)
 let DOWNLOAD_HTML = true;
-// DOWNLOAD_HTML = false; // uncomment to avoid redownloading files if already downloaded
 
 // switch to toggle exporting geojson files 
 let EXPORT_GEOJSONS = true;
-// EXPORT_GEOJSONS = false;
 
 // switch to toggle console logging
 let LOGGING = true;
-// LOGGING = false;
+
+
+
 
 
 // list of aerodrome codes to fetch detailed information for

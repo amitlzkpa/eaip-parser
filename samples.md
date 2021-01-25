@@ -1,7 +1,9 @@
 # Samples
 
 ## Aerodromes
-Path: `/json/aerodrome-index.json`
+List of aerodromes with additional information.  
+Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.3-en-GB.html  
+Path: `/json/aerodrome-index.json`  
 ```
 "VEAT": {
   "name": "AGARTALA AIRPORT",
@@ -12,8 +14,66 @@ Path: `/json/aerodrome-index.json`
 },
 ```
 
+## Licensing Status
+List of aerodromes licensed under public use category with the status of licensing.  
+Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.5-en-GB.html  
+Path: `/json/licensing-status.json`  
+```
+"VEAT": {
+  "name": "Agartala Airport",
+  "code": "VEAT"
+},
+```
+
+## MET Stations
+List of meteorological stations providing observations and reports.  
+Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-GEN%203.5-en-GB.html  
+Path: `/json/met-stations.json`  
+```
+"VEAT": {
+  "name": "Agartala",
+  "code": "VEAT",
+  "reportingFrequency": "Hourly + Half hourly during HO",
+  "reportTypes": "METAR/TREND",
+  "observingSystem": [
+    "DIWE at ATC TOWER"
+  ],
+  "hoursOfOperation": "HJ",
+  "climatologyInformation": "NIL"
+},
+```
+
+## Night Aerodromes
+List of aerodromes equipped for night operations.  
+Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.4-en-GB.html  
+Path: `/json/night-aerodromes.json`
+```
+"VAAH": {
+  "name": "AHMEDABAD INTERNATIONAL AIRPORT \n\n SARDAR VALLABH BHAI PATEL INTERNATIONAL AIRPORT, AHMEDABAD",
+  "code": "VAAH"
+},
+```
+
+## Radios Stations
+List of radio navigation aids and systems.  
+Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html  
+Path: `/json/radios-stations.json`  
+```
+"AAT": {
+  "name": "AGATTI DME",
+  "code": "AAT",
+  "channel": "106X",
+  "location": [
+    72.17916666666667,
+    10.828055555555554
+  ],
+  "elevation": "43.00  FT"
+},
+```
+
 ## Airports Json
-Path: `/airports.json`
+A consolidated json containing information from multiple sources.  
+Path: `/json/airports.json`  
 ```
 "VEAT": {
   "code": "VEAT",
@@ -42,7 +102,8 @@ Path: `/airports.json`
 },
 ```
 
-## Airports Geodata geojson
+## Airports Geodata
+A geojson represnting airport positions with attached information.  
 Path: `/json/airports-geodata.geojson`
 ```
 {
@@ -84,41 +145,8 @@ Path: `/json/airports-geodata.geojson`
 }
 ```
 
-## Licensing Status
-Path: `/json/licensing-status.json`
-```
-"VEAT": {
-  "name": "Agartala Airport",
-  "code": "VEAT"
-},
-```
-
-## MET Stations
-Path: `/json/met-stations.json`
-```
-"VEAT": {
-  "name": "Agartala",
-  "code": "VEAT",
-  "reportingFrequency": "Hourly + Half hourly during HO",
-  "reportTypes": "METAR/TREND",
-  "observingSystem": [
-    "DIWE at ATC TOWER"
-  ],
-  "hoursOfOperation": "HJ",
-  "climatologyInformation": "NIL"
-},
-```
-
-## Night Aerodromes
-Path: `/json/night-aerodromes.json`
-```
-"VAAH": {
-  "name": "AHMEDABAD INTERNATIONAL AIRPORT \n\n SARDAR VALLABH BHAI PATEL INTERNATIONAL AIRPORT, AHMEDABAD",
-  "code": "VAAH"
-},
-```
-
 ## Radio Geodata
+A geojson represnting radio positions with attached information.  
 Path: `/json/radios-geodata.geojson`
 ```
 {
@@ -139,24 +167,20 @@ Path: `/json/radios-geodata.geojson`
 },
 ```
 
-## Radios Stations
-Path: `/json/radios-stations.json`
-```
-"AAT": {
-  "name": "AGATTI DME",
-  "code": "AAT",
-  "channel": "106X",
-  "location": [
-    72.17916666666667,
-    10.828055555555554
-  ],
-  "elevation": "43.00  FT"
-},
-```
-
-
 ## Detailed Aerodrome Data
-Path: `/json/<AIRPORT_CODE>.json`
+Detailed information about aerodrome including:
+- Name, Address, Contact Details, Refernece from city centre
+- Coordinates, Elevation, Reference Temperature, Magnetic Variation
+- Operation hours for services like security, fuelling, deicing, health, customs and more.
+- Available facilities and details like cargo handling, fuel, repair, hangars and more.
+- Available passenger facilities like restaurants, transportation, bank, medical and more.
+- Detailed runway information like labels, orientation, start-end coordinates, length, width, elevation and more.
+- Information on obstacles and position.
+- Weather information sources and details.
+- ATS callsigns and frequencies.
+Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1<AIRPORT_CODE>-en-GB.html  
+__eg:__  https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1VAAH-en-GB.html  
+Path: `/json/<AIRPORT_CODE>.json`  
 ```
 {
   "code": "VAAH",
