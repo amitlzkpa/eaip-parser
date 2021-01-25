@@ -4,7 +4,6 @@ const changeCase = require('change-case');
 
 const config = require('./config');
 const aerodrome = require('./aerodrome');
-const vors = require('./vors');
 
 
 // -----------------------------------------------------
@@ -29,7 +28,6 @@ async function main() {
 	if (!fs.existsSync(JSON_FILES_PATH)) fs.mkdirSync(JSON_FILES_PATH);
 	
 	await aerodrome.main(acds);
-	await vors.main();
 }
 
 main();

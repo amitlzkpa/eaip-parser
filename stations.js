@@ -40,6 +40,10 @@ async function fetchStationPages() {
 		{
 			name: 'night-aerodromes',
 			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.4-en-GB.html'
+		},
+		{
+			name: 'radio-positions',
+			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html'
 		}
 	];
 
@@ -67,13 +71,17 @@ let ngtStnRawPath = `${HTML_FILES_PATH}/night-aerodromes.html`;
 let ngtStnJsnPath = `${JSON_FILES_PATH}/night-aerodromes.json`;
 let NGT_STATIONS = {};
 
+let vorStnRawPath = `${HTML_FILES_PATH}/radio-positions.html`;
+let vorStnJsnPath = `${JSON_FILES_PATH}/radio-positions.json`;
+let VOR_STATIONS = {};
+
 let AIRPORT_DATA = {};
 let aptJsnPath = `${JSON_FILES_PATH}/airports.json`;
 
 
 async function parseMetPage() {
 
-	let txt, $, r;
+	let txt, $;
 
 	txt = await fs.readFileSync(metStnRawPath, 'utf-8');
 	$ = cheerio.load(txt);
@@ -112,7 +120,7 @@ async function parseMetPage() {
 
 async function parseLicPage() {
 
-	let txt, $, r;
+	let txt, $;
 
 	txt = await fs.readFileSync(licStsRawPath, 'utf-8');
 	$ = cheerio.load(txt);
@@ -139,7 +147,7 @@ async function parseLicPage() {
 
 async function parseArdPage() {
 
-	let txt, $, r;
+	let txt, $;
 
 	txt = await fs.readFileSync(ardStnRawPath, 'utf-8');
 	$ = cheerio.load(txt);
@@ -172,7 +180,7 @@ async function parseArdPage() {
 
 async function parseNgtPage() {
 
-	let txt, $, r;
+	let txt, $;
 
 	txt = await fs.readFileSync(ngtStnRawPath, 'utf-8');
 	$ = cheerio.load(txt);
@@ -193,6 +201,78 @@ async function parseNgtPage() {
 
 	utils.log(`Total night aerodromes: ${Object.keys(NGT_STATIONS).length}`);
 	fs.writeFileSync(ngtStnJsnPath, JSON.stringify(NGT_STATIONS, null, 2));
+
+}
+
+
+async function parseVorData() {
+
+	let txt, $;
+
+	txt = await fs.readFileSync(vorStnRawPath, 'utf-8');
+	$ = cheerio.load(txt);
+
+	let vorStations = {};
+	let vorStnTblIdx = 0;
+	let vorStnCnt = $(`table:eq(${vorStnTblIdx})`).find('tr').length;
+	for(let rIdx = 2; rIdx < vorStnCnt; rIdx++) {
+		try {
+			let name = $(`table:eq(${vorStnTblIdx})`).find(`tr:eq(${rIdx})`).find('td:eq(0)').text().trim();
+			let code = $(`table:eq(${vorStnTblIdx})`).find(`tr:eq(${rIdx})`).find('td:eq(1)').text().trim();
+			let channel = utils.arrayedParaLines($(`table:eq(${vorStnTblIdx})`).find(`tr:eq(${rIdx})`).find('td:eq(2)').text().trim())[0];
+			let aisCoords = $(`table:eq(${vorStnTblIdx})`).find(`tr:eq(${rIdx})`).find('td:eq(4)').text().trim();
+			let location = utils.parseAISCoords(aisCoords);
+			let elevation = $(`table:eq(${vorStnTblIdx})`).find(`tr:eq(${rIdx})`).find('td:eq(5)').text().trim();
+			let stationInfo = {
+				name,
+				code,
+				channel,
+				location,
+				elevation
+			};
+			vorStations[code] = stationInfo;
+		} catch (ex) {
+
+		}
+	}
+	VOR_STATIONS = vorStations;
+
+	utils.log(`Total vor stations: ${Object.keys(vorStations).length}`);
+	fs.writeFileSync(vorStnJsnPath, JSON.stringify(vorStations, null, 2));
+
+}
+
+
+async function saveVorGeojson() {
+
+	let features = [];
+
+	for(let vorData of Object.values(VOR_STATIONS)) {
+
+		let props = {
+			name: vorData.name,
+			code: vorData.code,
+			channel: vorData.channel,
+			elevation: vorData.elevation
+		};
+
+		let feat = {
+	      type: "Feature",
+	      properties: props,
+	      geometry: {
+	        "type": "Point",
+	        "coordinates": vorData.location
+	      }
+	    };
+	    features.push(feat);
+	}
+
+	let geoJson = {
+		type: "FeatureCollection",
+		features: features
+	};
+
+	fs.writeFileSync(`${config.EXPORT_PATH}/json/radios-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 
@@ -232,6 +312,8 @@ async function parseStationPages() {
 	await parseLicPage();
 	await parseArdPage();
 	await parseNgtPage();
+	await parseVorData();
+	await saveVorGeojson();
 	await consolidateAirportData();
 }
 
