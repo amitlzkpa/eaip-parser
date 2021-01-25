@@ -12,33 +12,28 @@ const utils = require('./utils');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 
-let HTML_FILES_PATH = `${config.EXPORT_PATH}/html`;
-let JSON_FILES_PATH = `${config.EXPORT_PATH}/json`;
-let GEOJSON_FILES_PATH = `${config.EXPORT_PATH}/geojson`;
-
-
-let metStnRawPath = `${HTML_FILES_PATH}/met-stations.html`;
-let metStnJsnPath = `${JSON_FILES_PATH}/met-stations.json`;
+let metStnRawPath = `${utils.HTML_FILES_PATH}/met-stations.html`;
+let metStnJsnPath = `${utils.JSON_FILES_PATH}/met-stations.json`;
 let MET_STATIONS = {};
 
-let licStsRawPath = `${HTML_FILES_PATH}/licensing-status.html`;
-let licStsJsnPath = `${JSON_FILES_PATH}/licensing-status.json`;
+let licStsRawPath = `${utils.HTML_FILES_PATH}/licensing-status.html`;
+let licStsJsnPath = `${utils.JSON_FILES_PATH}/licensing-status.json`;
 let LIC_STATIONS = {};
 
-let ardStnRawPath = `${HTML_FILES_PATH}/aerodrome-index.html`;
-let ardStnJsnPath = `${JSON_FILES_PATH}/aerodrome-index.json`;
+let ardStnRawPath = `${utils.HTML_FILES_PATH}/aerodrome-index.html`;
+let ardStnJsnPath = `${utils.JSON_FILES_PATH}/aerodrome-index.json`;
 let ARD_STATIONS = {};
 
-let ngtStnRawPath = `${HTML_FILES_PATH}/night-aerodromes.html`;
-let ngtStnJsnPath = `${JSON_FILES_PATH}/night-aerodromes.json`;
+let ngtStnRawPath = `${utils.HTML_FILES_PATH}/night-aerodromes.html`;
+let ngtStnJsnPath = `${utils.JSON_FILES_PATH}/night-aerodromes.json`;
 let NGT_STATIONS = {};
 
-let vorStnRawPath = `${HTML_FILES_PATH}/radio-positions.html`;
-let vorStnJsnPath = `${JSON_FILES_PATH}/radio-positions.json`;
+let vorStnRawPath = `${utils.HTML_FILES_PATH}/radio-positions.html`;
+let vorStnJsnPath = `${utils.JSON_FILES_PATH}/radio-positions.json`;
 let VOR_STATIONS = {};
 
 let AIRPORT_DATA = {};
-let aptJsnPath = `${JSON_FILES_PATH}/airports.json`;
+let aptJsnPath = `${utils.JSON_FILES_PATH}/airports.json`;
 
 
 // -----------------------------------------------------
@@ -74,7 +69,7 @@ async function fetchStationPages() {
 
 	for(let src of sources) {
 		const res = await axios.get(src.url);
-		fs.writeFileSync(`${HTML_FILES_PATH}/${src.name}.html`, res.data.toString());
+		fs.writeFileSync(`${utils.HTML_FILES_PATH}/${src.name}.html`, res.data.toString());
 	}
 }
 
@@ -274,7 +269,7 @@ async function saveVorGeojson() {
 		features: features
 	};
 
-	fs.writeFileSync(`${GEOJSON_FILES_PATH}/radio-positions-geodata.geojson`, JSON.stringify(geoJson, null, 2));
+	fs.writeFileSync(`${utils.GEOJSON_FILES_PATH}/radio-positions-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 
@@ -334,6 +329,7 @@ async function suckStationPages() {
 
 async function main() {
 
+	utils.setupFolders();
 	await suckStationPages();
 
 }

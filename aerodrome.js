@@ -13,11 +13,6 @@ const stations = require('./stations');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 
-let HTML_FILES_PATH = `${config.EXPORT_PATH}/html`;
-let JSON_FILES_PATH = `${config.EXPORT_PATH}/json`;
-let GEOJSON_FILES_PATH = `${config.EXPORT_PATH}/geojson`;
-
-
 // -----------------------------------------------------
 // -----------------------------------------------------
 
@@ -28,7 +23,7 @@ async function fetchAerodromeData(acd) {
 
 	utils.log(`Fetching data for ${acd}`);
 	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1${acd}-en-GB.html`);
-	fs.writeFileSync(`${HTML_FILES_PATH}/${acd}.html`, res.data.toString());
+	fs.writeFileSync(`${utils.HTML_FILES_PATH}/${acd}.html`, res.data.toString());
 	utils.log(`Fetched data for ${acd}`);
 
 }
@@ -39,7 +34,7 @@ async function parseAerodromeData(acd) {
 	utils.log(`Parsing data for ${acd}`);
 
 
-	let txt = await fs.readFileSync(`${HTML_FILES_PATH}/${acd}.html`, 'utf-8');
+	let txt = await fs.readFileSync(`${utils.HTML_FILES_PATH}/${acd}.html`, 'utf-8');
 	let $ = cheerio.load(txt);
 	let r;
 	let info = stations.AIRPORT_DATA[acd];
@@ -252,7 +247,7 @@ async function parseAerodromeData(acd) {
 	info.radioFrequencies = radioFrequencies;
 
 
-	fs.writeFileSync(`${JSON_FILES_PATH}/${acd}.json`, JSON.stringify(info, null, 2));
+	fs.writeFileSync(`${utils.JSON_FILES_PATH}/${acd}.json`, JSON.stringify(info, null, 2));
 
 
 	utils.log(`Parsed data for ${acd}`);
@@ -321,7 +316,7 @@ async function suckAllAerodromeData(acds) {
 		features: features
 	};
 
-	fs.writeFileSync(`${GEOJSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 2));
+	fs.writeFileSync(`${utils.GEOJSON_FILES_PATH}/airports-geodata.geojson`, JSON.stringify(geoJson, null, 2));
 
 }
 
@@ -332,6 +327,7 @@ async function suckAllAerodromeData(acds) {
 
 async function main(acds) {
 
+	utils.setupFolders();
 	await stations.main();
 	await suckAllAerodromeData(acds);
 

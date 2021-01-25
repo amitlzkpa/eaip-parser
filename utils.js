@@ -1,7 +1,24 @@
+const fs = require('fs');
 const geolib = require('geolib');
 
 const config = require('./config');
 
+
+// -----------------------------------------------------
+// -----------------------------------------------------
+
+
+let HTML_FILES_PATH = `${config.EXPORT_PATH}/html`;
+let JSON_FILES_PATH = `${config.EXPORT_PATH}/json`;
+let GEOJSON_FILES_PATH = `${config.EXPORT_PATH}/geojson`;
+
+
+function setupFolders() {
+	if (!fs.existsSync(config.EXPORT_PATH)) fs.mkdirSync(config.EXPORT_PATH);
+	if (!fs.existsSync(HTML_FILES_PATH)) fs.mkdirSync(HTML_FILES_PATH);
+	if (!fs.existsSync(JSON_FILES_PATH)) fs.mkdirSync(JSON_FILES_PATH);
+	if (!fs.existsSync(GEOJSON_FILES_PATH)) fs.mkdirSync(GEOJSON_FILES_PATH);
+}
 
 
 // -----------------------------------------------------
@@ -33,7 +50,11 @@ function log(msg) {
 
 
 module.exports = {
+	HTML_FILES_PATH,
+	JSON_FILES_PATH,
+	GEOJSON_FILES_PATH,
+	setupFolders,
 	parseAISCoords,
 	arrayedParaLines,
-	log
+	log,
 };
