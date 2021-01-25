@@ -1,6 +1,3 @@
-![Exported airport data viewed on geojson.io](/assets/scrnsht_geojsonio.png)  
-Sample of exported airport data viewed on [geojson.io](https://geojson.io)  
-
 # eAIP Parser
 The parser scans the eAIP portal and exports the information to json files.  
 [eAIP](https://aim-india.aai.aero/eaip) is the platform that [AAI](https://www.aai.aero) manages for public information about aeronautical infrastructure in India.  
@@ -39,3 +36,6 @@ Check out the samples to understand what the exported files are
 [SAMPLES](./samples.md)
 
 Tested with nodejs(14.5.0) on a Windows 10 machine.
+
+![Exported airport data viewed on geojson.io](/assets/scrnsht_geojsonio.png)  
+Sample of exported airport data viewed on [geojson.io](https://geojson.io)  
