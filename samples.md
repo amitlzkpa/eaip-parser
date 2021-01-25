@@ -1,9 +1,16 @@
 # Samples
 
-## Lists
-An export saves the following 5 files everytime which contain lists of information about different aspects of the aeronautical infrastructure.  
+## Config file setup
+Config file location: [`/config.js`](/config.js)
+- Avoid redownloading the source eAIP HTML files by setting `DOWNLOAD_HTML` to `false`.  
+- Quiten console logging by setting `LOGGING` to `false`.  
+- Change the exported folder by updating the `EXPORT_PATH` variable.  
+- Exporting geojson can be toggled off by setting `EXPORT_GEOJSONS` to `false`.  
 
-### Aerodromes
+## Lists
+An export saves the following 6 files everytime which contain lists of information about different aspects of the aeronautical infrastructure.  
+
+### 1. Aerodromes
 List of aerodromes with additional information.  
 Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.3-en-GB.html  
 Path: `/json/aerodrome-index.json`  
@@ -17,7 +24,7 @@ Path: `/json/aerodrome-index.json`
 },
 ```
 
-### Licensing Status
+### 2. Licensing Status
 List of aerodromes licensed under public use category with the status of licensing.  
 Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.5-en-GB.html  
 Path: `/json/licensing-status.json`  
@@ -28,7 +35,7 @@ Path: `/json/licensing-status.json`
 },
 ```
 
-### MET Stations
+### 3. MET Stations
 List of meteorological stations providing observations and reports.  
 Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-GEN%203.5-en-GB.html  
 Path: `/json/met-stations.json`  
@@ -46,7 +53,7 @@ Path: `/json/met-stations.json`
 },
 ```
 
-### Night Aerodromes
+### 4. Night Aerodromes
 List of aerodromes equipped for night operations.  
 Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.4-en-GB.html  
 Path: `/json/night-aerodromes.json`  
@@ -57,7 +64,7 @@ Path: `/json/night-aerodromes.json`
 },
 ```
 
-### Radios Stations
+### 5. Radios Stations
 List of radio navigation aids and systems.  
 Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html  
 Path: `/json/radios-stations.json`  
@@ -74,9 +81,9 @@ Path: `/json/radios-stations.json`
 },
 ```
 
-### Airports Json
+### 6. Airports Json
 A consolidated json containing information from multiple sources.  
-**This file relies on cache buildup generated from the above files having been created.**  
+*This file relies on cache buildup generated from the above files having been created.*  
 Path: `/json/airports.json`  
 ```
 "VEAT": {
@@ -112,7 +119,7 @@ Similar data as above with certain information picked and chosen and represented
 
 ### Airports Geodata
 A geojson Feature Collection representing airport positions as Points with attached information.  
-**This file relies on cache buildup generated from the above files having been created.**  
+*This file relies on cache buildup generated from the above files having been created.*  
 Path: `/json/airports-geodata.geojson`  
 ```
 {
@@ -156,7 +163,7 @@ Path: `/json/airports-geodata.geojson`
 
 ### Radio Geodata
 A geojson Feature Collection representing radio positions as Points with attached information.  
-**This file relies on cache buildup generated from the above files having been created.**  
+*This file relies on cache buildup generated from the above files having been created.*  
 Path: `/json/radios-geodata.geojson`  
 ```
 {
@@ -177,7 +184,7 @@ Path: `/json/radios-geodata.geojson`
 },
 ```
 
-### Detailed Aerodrome Data
+## Detailed Aerodrome Data
 Detailed information about individual aerodromes which includes:
 - Name, Address, Contact Details, Refernece from city centre
 - Coordinates, Elevation, Reference Temperature, Magnetic Variation
@@ -188,8 +195,9 @@ Detailed information about individual aerodromes which includes:
 - Information on obstacles and position.
 - Weather information sources and details.
 - ATS callsigns and frequencies.  
+Detailed information can be exported for only select files by updating `AERODROME_CODES` array in [the config file](/config.js).  
 Source: https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1<AIRPORT_CODE>-en-GB.html  
-**eg:**  https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1VAAH-en-GB.html  
+*eg:*  https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1VAAH-en-GB.html  
 Path: `/json/<AIRPORT_CODE>.json`  
 ```
 {

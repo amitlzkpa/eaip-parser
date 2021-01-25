@@ -34,3 +34,5 @@ It currently ignores the certificate verification. If you know a proper fix for 
 
 Check out the samples to understand what the exported files are  
 [SAMPLES](./samples.md)
+
+Tested with nodejs(14.5.0) on a Windows 10 machine.
