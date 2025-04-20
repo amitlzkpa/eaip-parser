@@ -47,23 +47,23 @@ async function fetchStationPages() {
 	let sources = [
 		{
 			name: 'met-stations',
-			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-GEN%203.5-en-GB.html'
+			url: 'https://aim-india.aai.aero/eaip-v2-06-2024/eAIP/IN-GEN%203.5-en-GB.html'
 		},
 		{
 			name: 'licensing-status',
-			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.5-en-GB.html'
+			url: 'https://aim-india.aai.aero/eaip-v2-06-2024/eAIP/IN-AD%201.5-en-GB.html'
 		},
 		{
 			name: 'aerodrome-index',
-			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.3-en-GB.html'
+			url: 'https://aim-india.aai.aero/eaip-v2-06-2024/eAIP/IN-AD%201.3-en-GB.html'
 		},
 		{
 			name: 'night-aerodromes',
-			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%201.4-en-GB.html'
+			url: 'https://aim-india.aai.aero/eaip-v2-06-2024/eAIP/IN-AD%201.4-en-GB.html'
 		},
 		{
 			name: 'radio-positions',
-			url: 'https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-ENR%204.1-en-GB.html'
+			url: 'https://aim-india.aai.aero/eaip-v2-06-2024/eAIP/IN-ENR%204.1-en-GB.html'
 		}
 	];
 

@@ -22,7 +22,7 @@ async function fetchAerodromeData(acd) {
 	if (!config.DOWNLOAD_HTML) return;
 
 	utils.log(`Fetching data for ${acd}`);
-	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-02-2020/eAIP/IN-AD%202.1${acd}-en-GB.html`);
+	const res = await axios.get(`https://aim-india.aai.aero/eaip-v2-06-2024/eAIP/IN-AD%202.1${acd}-en-GB.html`);
 	fs.writeFileSync(`${utils.HTML_FILES_PATH}/${acd}.html`, res.data.toString());
 	utils.log(`Fetched data for ${acd}`);
 
