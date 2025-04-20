@@ -39,3 +39,8 @@ Tested with nodejs(14.5.0) on a Windows 10 machine.
 
 ![Exported airport data viewed on geojson.io](/assets/scrnsht_geojsonio.png)  
 Sample of exported airport data viewed on [geojson.io](https://geojson.io)  
+
+# Commands
+
+- `npm start`: Downloads the data.
+- `npm run summarize`: Create a summarized file for data downloaded from `npm start` command.
