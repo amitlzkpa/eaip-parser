@@ -1,56 +1,40 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const inputPath = path.join(__dirname, "output/airports-geodata.geojson");
-const outputPath = path.join(__dirname, "output/summarized-airports.json");
+const inputPath = path.join(__dirname, "./exported-data/json/airports.json");
+const outputPath = path.join(__dirname, "./exported-data/summarized-airports.json");
 
-function formatObstacleData(obstacles) {
-  const formatted = [];
-
-  for (const [type, items] of Object.entries(obstacles || {})) {
-    items.forEach((item) => {
-      formatted.push({
-        type,
-        location: item.location,
-        elevation: item.elevation,
-        runwaysAffected: item.runwaysAffected,
-        remarks: item.remarks,
-      });
-    });
-  }
-
-  return formatted;
+function summarizeAirportData(data) {
+  return Object.values(data).map((airport) => {
+    return {
+      code: airport.code,
+      name: airport.name,
+      shortName: airport.shortName,
+      metar: {
+        reportingFrequency: airport.metar?.reportingFrequency || '',
+        reportTypes: airport.metar?.reportTypes || '',
+        observingSystem: airport.metar?.observingSystem || [],
+        hoursOfOperation: airport.metar?.hoursOfOperation || '',
+        climatologyInformation: airport.metar?.climatologyInformation || ''
+      },
+      traffic: {
+        vfr: airport.traffic?.vfr || false,
+        ifr: airport.traffic?.ifr || false,
+        international: airport.traffic?.international || false,
+        domestic: airport.traffic?.domestic || false,
+        scheduled: airport.traffic?.scheduled || false,
+        nonScheduled: airport.traffic?.nonScheduled || false,
+        private: airport.traffic?.private || false
+      }
+    };
+  });
 }
 
 function main() {
-  const geoJsonData = JSON.parse(fs.readFileSync(inputPath, "utf-8"));
-
-  const summarized = geoJsonData.features.map((feature) => {
-    const props = feature.properties;
-
-    return {
-      code: props.code,
-      name: props.name,
-      shortName: props.shortName,
-      elevation: props.elevation,
-      address: props.address,
-      phone: props.phone,
-      email: props.email,
-      runways: props.runways,
-      atisFreq: props.atisFreq,
-      towerFreq: props.towerFreq,
-      airspaceClassification: props.airspaceClassification,
-      radioFrequencies: props.radioFrequencies,
-      location: {
-        lat: feature.geometry.coordinates[1],
-        lon: feature.geometry.coordinates[0],
-      },
-      obstacles: formatObstacleData(props.obstacles),
-    };
-  });
-
+  const rawData = JSON.parse(fs.readFileSync(inputPath, 'utf-8'));
+  const summarized = summarizeAirportData(rawData);
   fs.writeFileSync(outputPath, JSON.stringify(summarized, null, 2));
-  console.log(`✅ Summarized data with obstacles written to ${outputPath}`);
+  console.log(`✅ Summarized airport data written to ${outputPath}`);
 }
 
 main();
