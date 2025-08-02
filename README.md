@@ -38,7 +38,7 @@ Check out the samples to understand what the exported files are
 Tested with nodejs(14.5.0) on a Windows 10 machine.
 
 ![Exported airport data viewed on geojson.io](/assets/scrnsht_geojsonio.png)  
-![Exported airways data viewed on geojson.io](/assets/scrnsht_airways.png)  
+![Exported airways data viewed on geojson.io](/assets/scrnsht_airways.jpg)  
 
 # Commands
 
