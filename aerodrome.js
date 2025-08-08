@@ -33,6 +33,13 @@ async function parseAerodromeData(acd) {
 
 	utils.log(`Parsing data for ${acd}`);
 
+	if (!stations.AIRPORT_DATA[acd]) {
+        stations.AIRPORT_DATA[acd] = {
+            name: acd,
+            shortName: acd,
+            traffic: {}
+        };
+    }
 
 	let txt = await fs.readFileSync(`${utils.HTML_FILES_PATH}/${acd}.html`, 'utf-8');
 	let $ = cheerio.load(txt);
